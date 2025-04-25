@@ -121,6 +121,6 @@ async fn main() {
     let routes = ws_route.or(rooms_data_route).recover(handle_rejection).with(cors);
 
     // Run the server
-    println!("Server running at localhost:8080");
+    println!("Server running at 0.0.0.0:8080");
     warp::serve(routes).run(([0, 0, 0, 0], 8080)).await;
 }
