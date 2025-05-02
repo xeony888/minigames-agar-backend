@@ -200,10 +200,13 @@ const DOT_EXPIRY_SECS: u64 = 10;
 pub struct Dot {
     pub x: f64,
     pub y: f64,
+    #[serde(skip)]
     pub vx: f64,
+    #[serde(skip)]
     pub vy: f64,
     pub radius: f64,
     pub emitter: Option<String>,
+    #[serde(skip)]
     pub emit_time: Option<u64>,
 }
 
