@@ -12,6 +12,7 @@ use warp::reply::Reply;
 use warp::ws::{Message, WebSocket};
 use warp::Filter;
 pub mod game;
+pub mod math;
 
 async fn handle_connection(ws: WebSocket, rooms: Rooms, query: RoomQuery) {
     let (mut ws_tx, mut ws_rx) = ws.split();
@@ -32,13 +33,13 @@ async fn handle_connection(ws: WebSocket, rooms: Rooms, query: RoomQuery) {
     });
     println!("Client {} connected", query.username);
     let mut rng = ChaCha8Rng::from_os_rng();
-    let x_coord: f32 = rng.random_range(1.0..=WIDTH);
-    let y_coord: f32 = rng.random_range(1.0..=HEIGHT);
+    let x_coord: f64 = rng.random_range(1.0..=WIDTH);
+    let y_coord: f64 = rng.random_range(1.0..=HEIGHT);
     let player = Player {
         username: query.username.clone(),
         x: x_coord,
         y: y_coord,
-        radius: 10,
+        radius: 10.0,
         vx: 0.0,
         vy: 0.0,
         sender: tx.clone(),
@@ -90,6 +91,7 @@ async fn main() {
             entry_fee: 5, // cents,
             players: Vec::new(),
             dots: Vec::new(),
+            virus: Vec::new(),
         };
         let arc = Arc::new(RwLock::new(room));
         start_game_loop(arc.clone());
