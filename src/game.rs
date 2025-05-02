@@ -126,18 +126,18 @@ impl Room {
             self.dots.push(dot);
         }
         let virus_to_add = MAX_VIRUS - self.virus.len();
-        // for _ in 0..virus_to_add {
-        //     let mut rng = ChaCha8Rng::from_os_rng();
-        //     let x_coord: f64 = rng.random_range(1.0..=WIDTH);
-        //     let y_coord: f64 = rng.random_range(1.0..=HEIGHT);
-        //     let radius = rng.random_range(MIN_VIRUS_RADIUS..=MAX_VIRUS_RADIUS);
-        //     let virus = Virus {
-        //         x: x_coord,
-        //         y: y_coord,
-        //         radius,
-        //     };
-        //     self.virus.push(virus);
-        // }
+        for _ in 0..virus_to_add {
+            let mut rng = ChaCha8Rng::from_os_rng();
+            let x_coord: f64 = rng.random_range(1.0..=WIDTH);
+            let y_coord: f64 = rng.random_range(1.0..=HEIGHT);
+            let radius = rng.random_range(MIN_VIRUS_RADIUS..=MAX_VIRUS_RADIUS);
+            let virus = Virus {
+                x: x_coord,
+                y: y_coord,
+                radius,
+            };
+            self.virus.push(virus);
+        }
     }
 }
 
